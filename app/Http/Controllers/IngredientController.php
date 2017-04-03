@@ -37,6 +37,9 @@ class IngredientController extends Controller
 	 */
 	public function store(Request $request)
 	{
+		/**
+		* @todo validation data
+		*/
 		$ingredient = new Ingredient;
 		$ingredient->name = request('name');
 		$ingredient->price = request('price');
