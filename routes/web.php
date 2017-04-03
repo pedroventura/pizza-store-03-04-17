@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// list all
+// list all ingredients
 Route::get('/ingredients', 'IngredientController@index');
 // display create form
 Route::get('/ingredients/create', 'IngredientController@create');
@@ -27,3 +27,12 @@ Route::post('/ingredients', 'IngredientController@store');
 Route::get('/ingredients/edit/{id}', 'IngredientController@edit');
 // patch to ingredient
 Route::patch('/ingredients/{id}', 'IngredientController@update');
+
+// list all pizzas
+Route::get('/pizzas', 'PizzaController@index');
+// Display create form
+Route::get('/pizzas/create', 'PizzaController@create');
+// Display a pizza
+Route::get('/pizzas/{id}', 'PizzaController@show');
+// Create the pizza
+Route::post('/pizzas', 'PizzaController@store');
