@@ -53,10 +53,9 @@ class IngredientController extends Controller
 	 * @param  \App\Ingredient  $ingredient
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show(Ingredient $id)
+	public function show($id)
 	{
 		$ingredient = Ingredient::find($id);
-
 		return view('ingredients.show', compact('ingredient'));
 	}
 
