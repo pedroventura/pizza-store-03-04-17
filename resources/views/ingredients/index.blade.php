@@ -1,3 +1,6 @@
+	@extends('layout')
+
+	@section ('content')
 	<ul>	
 	@foreach ($ingredients as $ingredient)
 	<li>
@@ -7,3 +10,4 @@
 	</li>
 	@endforeach
 	</ul>
+	@endsection
