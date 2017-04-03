@@ -21,7 +21,7 @@
 				</thead>
 				<tbody>
 					<tr>
-					<td><p>{{  $ingredient->name  }}</p></td>
+					<td><p>{{ $ingredient->name }}</p></td>
 					<td><p>{{ $ingredient->price }}</p></td>
 					</tr>
 				</tbody>
