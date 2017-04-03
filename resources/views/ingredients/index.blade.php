@@ -1,9 +1,12 @@
 	@extends('layout')
 
 	@section ('content')
-	<ul>	
+	
+	<h1>Ingredients</h1>
+	
+	<ul class="list-group">	
 	@foreach ($ingredients as $ingredient)
-	<li>
+	<li class="list-group-item">
 		<a href="/ingredients/{{$ingredient->id}}">
 			{{$ingredient->name}}
 		</a>
