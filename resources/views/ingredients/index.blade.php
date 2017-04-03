@@ -20,6 +20,7 @@
 						<a role="button" href="/ingredients/edit/{{$ingredient->id}}" class="btn btn-primary btn-sm">Edit</a>
 						<a role="button" class="btn btn-danger btn-sm">Delete</a>
 					</div>
+				</li>
 			@endforeach
 			</ul>
 		</div>
