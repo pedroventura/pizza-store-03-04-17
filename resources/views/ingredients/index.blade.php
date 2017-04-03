@@ -2,7 +2,7 @@
 
 	@section ('content')
 	
-	<h1>Ingredients</h1>
+	<h1>Ingredients List</h1>
 	
 	<ul class="list-group">	
 	@foreach ($ingredients as $ingredient)

@@ -39,10 +39,8 @@
 
 	<div class="container">
 
-	  <div class="starter-template">
 	  	@yield('content')
 		
-	  </div>
 
 	</div><!-- /.container -->
 
