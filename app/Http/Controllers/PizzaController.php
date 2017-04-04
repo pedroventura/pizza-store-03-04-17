@@ -48,7 +48,11 @@ class PizzaController extends Controller
 
 		$pizza = new Pizza;
 		$pizza->name = request('name');
-		$pizza->image = $path;
+		
+		if (!empty($path)) {
+			$pizza->image = $path;
+		}
+
 		// retrieve all ingredients
 		$ingredients = $request->input('ingredients');
 		$pizza->save();
@@ -78,9 +82,12 @@ class PizzaController extends Controller
 	 * @param  \App\Pizza  $pizza
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit(Pizza $pizza)
+	public function edit(Pizza $id)
 	{
-		//
+		$pizza = Pizza::with('Ingredient')->find($id);
+		// get all ingredients
+		$ingredients = DB::table('ingredients')->get();
+		return view('pizzas.edit', compact('pizza','ingredients'));
 	}
 
 	/**
@@ -90,9 +97,28 @@ class PizzaController extends Controller
 	 * @param  \App\Pizza  $pizza
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, Pizza $pizza)
+	public function update(Request $request, Pizza $id)
 	{
-		//
+		$res = $this->validate($request, [
+			'name' => 'required',
+			]);
+
+		if ($request->hasFile('image')) {
+			$path = $request->file('image')->store('img','public');
+		}
+
+		$pizza = Pizza::find($id);
+		$pizza->name = request('name');
+		if (!empty($path)) {
+			$pizza->image = $path;
+		}
+		// retrieve all ingredients
+		$ingredients = $request->input('ingredients');
+		$pizza->save();
+		// save all ingredients
+		$pizza->Ingredient()->sync($ingredients);
+
+		return redirect('/pizzas');
 	}
 
 	/**

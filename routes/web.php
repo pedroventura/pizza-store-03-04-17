@@ -36,3 +36,7 @@ Route::get('/pizzas/create', 'PizzaController@create');
 Route::get('/pizzas/{id}', 'PizzaController@show');
 // Create the pizza
 Route::post('/pizzas', 'PizzaController@store');
+// pizza edit form
+Route::get('/pizzas/edit/{id}', 'PizzaController@edit');
+// patch to pizza
+Route::patch('/pizzas/{id}', 'PizzaController@update');
