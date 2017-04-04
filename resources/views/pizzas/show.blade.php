@@ -12,6 +12,7 @@
 <div class="row">
 	<div class="col-6">
 		<div class="table-responsive">
+			<img src="/storage/{{ $pizza->image }}" class="img-fluid" alt="{{ $pizza->name }}">
 			<table class="table table-striped">
 				<thead>
 					<tr>
