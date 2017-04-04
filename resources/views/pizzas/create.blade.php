@@ -7,12 +7,12 @@
 	{{ csrf_field() }}
 	<div class="form-group">
 		<label for="name">Name</label>
-		<input type="text" class="form-control" name="name" id="name" placeholder="Pizza Name">
+		<input type="text" class="form-control" name="name" id="name" placeholder="Pizza Name" required>
 	</div>
 
 	<div class="form-group">
 		<label for="Image">Image</label>
-		<input type="file" class="form-control" id="image" name="image" placeholder="Ingredient Image">
+		<input type="file" class="form-control" id="image" name="image" placeholder="Ingredient Image" required>
 	</div>
 
 	<div class="form-group">
