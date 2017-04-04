@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Pizza;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;	
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class PizzaController extends Controller
 {
@@ -127,9 +128,13 @@ class PizzaController extends Controller
 	 * @param  \App\Pizza  $pizza
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy(Pizza $pizza)
+	public function destroy(Pizza $id)
 	{
-		//
+		$pizza = Pizza::findOrFail($id);
+		$pizza->Ingredient()->detach();
+		File::delete(storage_path() . '/app/public/'. $pizza->image);
+		$res = $pizza->delete();
+		return redirect('/pizzas');
 	}
 
 	/**

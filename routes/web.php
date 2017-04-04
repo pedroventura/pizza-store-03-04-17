@@ -27,7 +27,7 @@ Route::post('/ingredients', 'IngredientController@store');
 Route::get('/ingredients/edit/{id}', 'IngredientController@edit');
 // patch to ingredient
 Route::patch('/ingredients/{id}', 'IngredientController@update');
-// delete a ingredient
+// delete an ingredient
 Route::delete('/ingredients/{id}', 'IngredientController@destroy');
 
 // list all pizzas
@@ -42,3 +42,5 @@ Route::post('/pizzas', 'PizzaController@store');
 Route::get('/pizzas/edit/{id}', 'PizzaController@edit');
 // patch to pizza
 Route::patch('/pizzas/{id}', 'PizzaController@update');
+// delete a pizza
+Route::delete('/pizzas/{id}', 'PizzaController@destroy');
