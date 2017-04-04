@@ -18,7 +18,11 @@
 					</a>
 					<div class="bd-example" data-example-id="">
 						<a role="button" href="/ingredients/edit/{{$ingredient->id}}" class="btn btn-primary btn-sm">Edit</a>
-						<a role="button" class="btn btn-danger btn-sm">Delete</a>
+						<form method="POST" action="/ingredients/{{$ingredient->id}}" accept-charset="UTF-8">
+							{{ csrf_field() }}
+							{!! method_field('delete') !!}
+							<input class="btn btn-danger btn-sm" type="submit" value="Delete">
+						</form>
 					</div>
 				</li>
 			@endforeach

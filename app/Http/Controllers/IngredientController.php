@@ -100,8 +100,11 @@ class IngredientController extends Controller
 	 * @param  \App\Ingredient  $ingredient
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy(Ingredient $ingredient)
+	public function destroy(Ingredient $id)
 	{
-		//
+		$ingredient = Ingredient::findOrFail($id);
+		$ingredient->Pizza()->detach();
+		$res = $ingredient->delete();
+		return redirect('/ingredients');
 	}
 }
