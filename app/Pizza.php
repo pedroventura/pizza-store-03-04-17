@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pizza extends Model
 {
-    public function ingredients()
-    {
-        return $this->belongsToMany('App\Ingredient');
-    }
+	public function Ingredient()
+	{
+		return $this->belongsToMany('App\Ingredient', 'ingredient_pizza', 'pizza_id', 'ingredient_id');
+	}
 }

@@ -3,14 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Pizza;
-use App\Ingredient; // @todo should not use this, use propper relation model
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;	
 
 class PizzaController extends Controller
 {
-
-	protected $totalPrice;
-
 
 	/**
 	 * Display a listing of the resource.
@@ -19,12 +16,10 @@ class PizzaController extends Controller
 	 */
 	public function index()
 	{
-		//$pizzas = Pizza::all();
-		$pizzas = Pizza::has('ingredients')->get();
-		return $pizzas;
+		$pizzas = Pizza::all();
 		// disallow view to show json data
 		// @todo include .json extension to dispatch method to make html and json compatible
-		//return view('pizzas.index', compact('pizzas'));
+		return view('pizzas.index', compact('pizzas'));
 	}
 
 	/**
@@ -34,7 +29,7 @@ class PizzaController extends Controller
 	 */
 	public function create()
 	{
-		$ingredients = Ingredient::all();
+		$ingredients = DB::table('ingredients')->get();
 		return view('pizzas.create', compact('ingredients'));
 	}
 
@@ -46,14 +41,20 @@ class PizzaController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		/**
-		* @todo validation data. Process and save image
-		* Save ingredients to joining table ingredient_pizza
-		*/
+		// save image. // @todo validate image and extension. 
+		if ($request->hasFile('image')) {
+			$path = $request->file('image')->store('public/img/');
+		}
+
 		$pizza = new Pizza;
 		$pizza->name = request('name');
-		//$pizza->image = request('image');
+		$pizza->image = $path;
+		// retrieve all ingredients
+		$ingredients = $request->input('ingredients');
 		$pizza->save();
+		// save all ingredients
+		$pizza->Ingredient()->attach($ingredients);
+
 		return redirect('/pizzas');
 	}
 
@@ -66,9 +67,8 @@ class PizzaController extends Controller
 	public function show(Pizza $id)
 	{
 		$pizza = Pizza::find($id);
-		// retrieve all ingredientes for the current pizza
-		$ingredients = self::__formatIngredients($pizza->ingredients);
-		$totalPrice = $this->totalPrice;
+		$ingredients = $pizza->Ingredient()->get();
+		$totalPrice = self::__setTotalPrice($ingredients);
 		return view('pizzas.show', compact('pizza' ,'ingredients', 'totalPrice'));
 	}
 
@@ -107,18 +107,14 @@ class PizzaController extends Controller
 	}
 
 	/**
-	* 
+	* calculate total Price for a Pizza
 	*/
-	protected function __formatIngredients($ingredients = array()) {
-
-		$res = array();
+	protected function __setTotalPrice($ingredients = array()) 
+	{
 		$resPrice = 0;
 		foreach ($ingredients as $ingredient) {
-			$res[] = $ingredient->name;
 			$resPrice += $ingredient->price;
 		}
-		$this->totalPrice = ((50 / 100) * $resPrice) + $resPrice;
-
-		return $res;
+		return ((50 / 100) * $resPrice) + $resPrice;
 	}
 }

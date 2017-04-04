@@ -2,7 +2,7 @@
 
 @section ('content')
 
-<form method="POST" action="/pizzas">
+<form method="POST" action="/pizzas" enctype="multipart/form-data">
 
 	{{ csrf_field() }}
 	<div class="form-group">
@@ -26,7 +26,7 @@
 				*/
 				?>
 				<label>{{$ingredient->name}}</label>
-				<input name="{{$ingredient->name}}" type="checkbox" value="">	
+				<input name="ingredients[]" type="checkbox" value="{{$ingredient->id}}">	
 				</li>
 			@endforeach
 		</ul>
