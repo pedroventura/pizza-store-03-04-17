@@ -43,7 +43,7 @@ class PizzaController extends Controller
 	{
 		// save image. // @todo validate image and extension. 
 		if ($request->hasFile('image')) {
-			$path = $request->file('image')->store('public/img/');
+			$path = $request->file('image')->store('img','public');
 		}
 
 		$pizza = new Pizza;
